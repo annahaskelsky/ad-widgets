@@ -1,49 +1,32 @@
+function getData() {
+    const xhr = new XMLHttpRequest();
 
-(async function getData() {
-    // const widgetContainer = document.getElementById('widgets')
-    const res = await fetch("../data/res2.json")
-    const a = await res.json()
-    console.log(a);
-    return a
-    
-    // let strHTML = ''
-    // a.list.forEach(item => {
-    //     strHTML += `<a href=${item.url} target="_blank">
-    //     <article class="widget">
-    //     <div class="img-container">
-    //     <img src=${item.thumbnail[0].url} alt="placeholder" />
-    //     </div>
-    //     <h4 class="article-title">${item.name}</h4>
-    //     <span class="sponser-name">${item.branding} | Ad</span>
-    //     </article>
-    //     </a>`
-    // });
-    // widgetContainer.innerHTML = strHTML
-})();
+    return new Promise((resolve, reject) => {
+        // request state change event
+        xhr.onreadystatechange = function () {
+            // request completed?
+            if (xhr.readyState !== 4) return;
 
-function displayData(data) {
-    let strHTML = ''
-    data.forEach(item => {
-        strHTML += `<a href=${item.url} target="_blank">
-        <article class="widget">
-        <div class="img-container">
-        <img src=${item.thumbnail[0].url} alt="placeholder" />
-        </div>
-        <h4 class="article-title">${item.name}</h4>
-        <span class="sponser-name">${item.branding} | Ad</span>
-        </article>
-        </a>`
-    });
-    const widgetContainer = document.getElementById('widgets')
-    widgetContainer.innerHTML = strHTML
+            if (xhr.status === 200) {
+                // request successful - show response
+                // console.log(xhr.responseText);
+                resolve(JSON.parse(xhr.responseText))
+            }
+            else {
+                // request error
+                console.log('HTTP error', xhr.status, xhr.statusText);
+            }
+        };
 
+        xhr.open('GET', URL);
+        // start request
+        xhr.send();
+    })
 }
 
-function add(a, b) {
-    return a + b
+module.exports = {
+    getData
 }
-
-module.exports = add
 
 
 

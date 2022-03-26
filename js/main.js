@@ -6,6 +6,7 @@ const URL = `http://api.taboola.com/1.0/json/${PUBLISHER_ID}/recommendations.get
 app.type=${APP_TYPE}&app.apikey=${API_KEY}&count=4&source.type=video&source.id=
 11111&source.url=http://www.site.com/videos/214321562187.html`
 
+// function
 const xhr = new XMLHttpRequest();
 xhr.open('GET', URL);
 
@@ -18,6 +19,7 @@ xhr.onreadystatechange = function () {
     if (xhr.status === 200) {
         // request successful - show response
         console.log(xhr.responseText);
+
     }
     else {
         // request error

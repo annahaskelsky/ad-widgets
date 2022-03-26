@@ -1,7 +1,8 @@
-import { dataService } from './data.service.js'
+import {dataService} from './data.service.js'
 
 (function () {
     dataService.getData().then(data => {
+        console.log(data);
         displayData(data.list);
     })
 })();
