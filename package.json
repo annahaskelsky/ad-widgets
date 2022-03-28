@@ -17,13 +17,13 @@
     "url": "https://github.com/annahaskelsky/ad-widgets/issues"
   },
   "homepage": "https://github.com/annahaskelsky/add-widgets#readme",
-  "devDependencies": {
-    "@babel/preset-env": "^7.16.11",
-    "jest": "^27.5.1"
-  },
   "dependencies": {
     "babel": "^6.23.0",
     "babel-jest": "^27.5.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "jest": "^27.5.1"
   },
   "jest": {
     "transform": {},

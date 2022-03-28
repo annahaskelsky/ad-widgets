@@ -1,13 +1,13 @@
-import { URL } from '../config.js'
+import { URL } from '../constants.js'
 
 function getData(onSuccess, onFailure, url = URL) {
-    const xhr = new XMLHttpRequest()
+   const xhr = new XMLHttpRequest()
     xhr.open('GET', url)
     xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) return
         if (xhr.status === 200) {
-            console.log(xhr.responseText)
-            onSuccess(JSON.parse(xhr.responseText).list)
+            const res = JSON.parse(xhr.responseText).list
+            onSuccess(res)
         } else {
             onFailure(xhr.statusText)
         }

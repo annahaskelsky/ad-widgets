@@ -12,7 +12,7 @@ describe('data controller test', () => {
         const elImgs = document.querySelectorAll('#widgets img')
         setTimeout(() => {
             expect(elImgs[1].src).toBe('https://picsum.photos/200')
-        }, 1000)
+        }, 100)
     })
 
     test('render 4 elements when got 4', () => {

@@ -9,15 +9,21 @@ function onInit() {
 function renderData(recommendations) {
     let strHTML = ''
     recommendations.forEach(item => {
-        strHTML += `<a class="widget-wrapper-link" href=${item.url} target="_blank">
-        <article class="widget">
-        <div class="img-container">
-        <img src=${item.thumbnail[0].url} onerror="this.src='https://picsum.photos/200'; this.onerror = null" />
-        </div>
-        <h4 class="article-title">${item.name}</h4>
-        <span class="sponser-name">${item.branding} ${(item.origin === 'sponsored') && ' | Ad'}</span>
-        </article>
-        </a>`
+        const { url, thumbnail, name, branding, origin } = item
+        strHTML += `
+            <a class="widget-wrapper-link" href=${url} target="_blank">
+                <article class="widget">
+                    <div class="img-container">
+                        <img 
+                            src=${thumbnail[0].url} 
+                            onerror="this.src='https://picsum.photos/200'; this.onerror = null" 
+                        />
+                    </div>
+                    <h4 class="article-title">${name}</h4>
+                    <span class="sponser-name">${branding} ${(origin === 'sponsored') ? ' | Ad' : ''}</span>
+                </article>
+            </a>
+        `
     })
     const widgetContainer = document.getElementById('widgets')
     widgetContainer.innerHTML = strHTML
