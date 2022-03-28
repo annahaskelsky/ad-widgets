@@ -1,4 +1,7 @@
-import {dataService} from './data.service.js'
+import { dataService } from './services/data.service.js'
+// const { dataService } = require('./data.service')
+// const { dataService } = require('../assets/img/default.png')
+
 
 (function () {
     dataService.getData().then(data => {
@@ -8,12 +11,13 @@ import {dataService} from './data.service.js'
 })();
 
 function displayData(data) {
+    console.log(data);
     let strHTML = ''
     data.forEach(item => {
-        strHTML += `<a href=${item.url} target="_blank">
+        strHTML += `<a class="widget-wrapper-link" href=${item.url} target="_blank">
         <article class="widget">
         <div class="img-container">
-        <img src=${item.thumbnail[0].url} alt="placeholder" />
+        <img src=${item.thumbnail[0].url} onerror="this.src='https://picsum.photos/200'; this.onerror = null" />
         </div>
         <h4 class="article-title">${item.name}</h4>
         <span class="sponser-name">${item.branding} | Ad</span>
@@ -22,4 +26,8 @@ function displayData(data) {
     });
     const widgetContainer = document.getElementById('widgets')
     widgetContainer.innerHTML = strHTML
+}
+
+export const dataController = {
+    displayData
 }

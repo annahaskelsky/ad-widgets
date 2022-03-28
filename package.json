@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/annahaskelsky/ad-widgets.git"

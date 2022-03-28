@@ -1,7 +1,8 @@
-// const { add } = require('../try')
-const { getData } = require('../try')
-const dataMock = require('../../data/res.json')
-
+// const { getData } = require('../data.service')
+// const dataMock = require('../../data/res.json')
+import { jest } from '@jest/globals'
+import { dataService } from '../services/data.service'
+import * as dataMock from '../data/res.json'
 // test('fetched data', () => {
 //     expect(getData()).toBe(dataMock)
 // })
@@ -14,7 +15,8 @@ const createMockXHR = responseJSON => {
         open: jest.fn(),
         send: jest.fn(),
         readyState: 4,
-        status: 200
+        status: 200,
+        responseText: JSON.stringify(responseJSON || {})
     };
     return mockXHR;
 };
@@ -33,13 +35,15 @@ describe("API integration test suite", function () {
     });
 
     test("Should retrieve the list of posts from the server when calling getPosts method", function (done) {
-        const reqPromise = getData();
-        mockXHR.responseText = JSON.stringify(dataMock.list);
+        const reqPromise = dataService.getData();
+        console.log(reqPromise);
+        mockXHR.responseText = JSON.stringify(dataMock);
         mockXHR.onreadystatechange();
         reqPromise.then(posts => {
-            expect(posts.length).toBe(4);
-            expect(posts[0].name).toBe("Top Chef 2014 : des nouvelles règles absurdes - Elle à Table");
-            expect(posts[1].type).toBe("video");
+            console.log(posts.default.list);
+            expect(posts.default.list.length).toBe(4);
+            expect(posts.default.list[0].name).toBe("Top Chef 2014 : des nouvelles règles absurdes - Elle à Table");
+            expect(posts.default.list[1].type).toBe("video");
             done();
         });
     });
